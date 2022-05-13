@@ -4,7 +4,7 @@ ENV ENABLE_MICROPIPENV="1"
 USER root
 
 # Install java + code-server
-RUN yum -y install java-$JAVA_VERSION-openjdk maven && \
+RUN yum -y install maven && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     rm -rf $HOME/.cache/code-server && \
     yum clean all
