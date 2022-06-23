@@ -42,7 +42,7 @@ Create a custom notebook available in the ODH JupyterHub spawner.
     ```
 
     ```bash
-    oc apply -n sepsis-detection -f s2i-custom-notebook-image-stream.yaml
+    oc apply -n opendatahub -f s2i-custom-notebook-image-stream.yaml
     ```
 
 6. Navigate to your ODH deployed JupyterHub spawner. You will see the custom notebook in the list of available notebooks!
