@@ -17,9 +17,15 @@ USER root
 WORKDIR /tmp/
 
 # Copying custom packages
-COPY Pipfile Pipfile.lock /tmp/
-RUN micropipenv install --deploy && \
-    rm -rf /opt/app-root/lib/python3.9/site-packages/~*
+COPY pyproject.toml poetry.lock /tmp/
+
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+ENV PATH="$HOME/.poetry/bin:${PATH}"
+RUN cd /tmp && poetry export -f requirements.txt --output requirements.txt --without-hashes && rm -f poetry.lock && rm -f pyproject.toml
+
+
+RUN pip install --upgrade pip && \
+    pip install -r /tmp/requirements.txt
 
 RUN jupyter lab build && \
     jupyter lab clean && \
