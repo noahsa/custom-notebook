@@ -1,4 +1,0 @@
-requirements_format: pip
-
-runtime_environments:
-  - name: python38
