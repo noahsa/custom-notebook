@@ -21,13 +21,6 @@ COPY Pipfile Pipfile.lock /tmp/
 RUN micropipenv install --deploy && \
     rm -rf /opt/app-root/lib/python3.9/site-packages/~*
 
-# Streamlit extenstion installation
-COPY streamlit-launcher.sh /opt/app-root/bin/
-COPY streamlit-menu/dist/jupyterlab_streamlit_menu-0.1.0-py3-none-any.whl /tmp/
-
-# Install packages and cleanup upgrades
-RUN pip install --no-cache-dir /tmp/jupyterlab_streamlit_menu-0.1.0-py3-none-any.whl
-
 RUN jupyter lab build && \
     jupyter lab clean && \
     npm cache clean --force && \
